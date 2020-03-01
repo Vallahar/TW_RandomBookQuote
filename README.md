@@ -9,7 +9,7 @@ Hosted on Google Cloud.
 
 Programmed in python using `tweepy`.
 
-Automated using a `tmux` session with and `crontab` for periodicity
+Automated using a `tmux` session and `crontab` for periodicity
 
 **Important:** To run the script, one has first to activate the virtual environment typing `source ./venv/bin/activate`.
 
