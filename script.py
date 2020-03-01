@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 import tweepy
 from key import consumer_key, consumer_secret, access_token, access_token_secret
 from random import randrange
@@ -22,10 +23,14 @@ def generate(fileName):
 
     while(True):
         tweet = content[randrange(len(content))].strip()
-        if ((len(tweet) + 1) <= CHAR_LIMIT and tweet.strip() != ""):
+        if ((len(tweet) + 1) <= CHAR_LIMIT and tweet.strip() != "" and checkDuplicate(tweet) == False):
             break
 
-    return tweet + "."
+    # I acknowledge this could be done with regex
+    if (tweet[-1] != "!" or tweet[-1] != "?"):
+        tweet += "."
+
+    return tweet
 
 # Function that decides the source of the tweet
 def tweet():
@@ -42,6 +47,23 @@ def tweet():
 
     return tweet
 
+# Function that searches for duplicates in the tweetLog
+def checkDuplicate(str):
+    with open('tweetLog.txt') as tweetLog:
+        if str in tweetLog.read():
+            return True
+        else: 
+            return False
+
+def writeLog(tweetContent):
+    fd = open("tweetLog.txt", "a+")
+    now = datetime.now()
+    string = "Tweet sent on " + now.strftime("%H:%M:%S - %d/%m/%Y (GMT)")
+    string += "\n\t" + tweetContent + "\n''''''''''\n"
+    fd.write(string)
+    fd.close
+
+
 # Twitter authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -50,4 +72,9 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 # Tweet sender
-api.update_status(tweet())
+newTweet = tweet()
+api.update_status(newTweet)
+writeLog(newTweet)
+
+# Success notice to be redirected to a log file (a bit dirty, I know)
+print("# Success")
