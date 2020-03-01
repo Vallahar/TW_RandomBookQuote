@@ -22,10 +22,10 @@ def generate(fileName):
 
     while(True):
         tweet = content[randrange(len(content))].strip()
-        if (len(tweet) <= CHAR_LIMIT and tweet.strip() != ""):
+        if ((len(tweet) + 1) <= CHAR_LIMIT and tweet.strip() != ""):
             break
 
-    return tweet
+    return tweet + "."
 
 # Function that decides the source of the tweet
 def tweet():
