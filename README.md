@@ -23,8 +23,8 @@ Otherwise, the `tweepy` module might not be recognized.
 * A random phrase is selected, if it's tweetable, we're up to go
 
 ### TO DO:
-[ ] Hone the method of obtaining the quotes
-[X] Check if I run into problems of tweeting already existing quotes
+- [ ] Hone the method of obtaining the quotes
+- [X] Check if I run into problems of tweeting already existing quotes
     * A timestamped log of tweeted strings is kept, and upong tweet generation, it's checked for duplicates.
 
 ### Links
