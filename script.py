@@ -1,4 +1,4 @@
-#!venv/lib64/python3.6
+# -*- coding: utf-8 -*-
 import tweepy
 from key import consumer_key, consumer_secret, access_token, access_token_secret
 from random import randrange
@@ -32,13 +32,13 @@ def tweet():
     choice = randrange(4)
 
     if (choice == INTRO):
-        tweet = generate("intro.txt")
+        tweet = generate("sources/intro.txt")
     elif (choice == LEGENDS):
-        tweet = generate("legends.txt")
+        tweet = generate("sources/legends.txt")
     elif (choice == LETTERS):
-        tweet = generate("letters.txt")
+        tweet = generate("sources/letters.txt")
     elif (choice == POEMS):
-        tweet = generate("poems.txt")
+        tweet = generate("sources/poems.txt")
 
     return tweet
 

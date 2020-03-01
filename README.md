@@ -5,6 +5,12 @@ Hosted on Google Cloud.
 
 Programmed in python using tweepy.
 
+**Important:** To run the script, one has first to activate the virtual environment typing
+`source ./venv/bin/activate`
+Then just executing
+`python script.py`
+Otherwise, the tweepy module might not be recognized.
+
 ## Logic for the extraction
 * One of the 4 source files is selected. They have been generated from the original text.
 * The text is split at any period encountered.
