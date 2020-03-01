@@ -5,10 +5,18 @@ Hosted on Google Cloud.
 
 Programmed in python using tweepy.
 
-## TO DO:
-* Treat the source for phrase extraction.
-* Deploy into Google Cloud
+## Logic for the extraction
+* One of the 4 source files is selected. They have been generated from the original text.
+* The text is split at any period encountered.
+* A random phrase is selected, if it's tweetable, we're up to go
+
+### TO DO:
+* Hone the method of obtaining the quotes
+* Check if I run into problems of tweeting already existing quotes
 
 ### Links
-https://realpython.com/twitter-bot-python-tweepy/
-https://www.youtube.com/watch?v=5OL7fu2R4M8&t=3s
+[Creating a Tweeter bot tutorial](https://realpython.com/twitter-bot-python-tweepy/)
+
+[Executing a python script from Google Cloud](https://www.youtube.com/watch?v=5OL7fu2R4M8&t=3s)
+
+[Project Gutenberg Source file](http://www.gutenberg.org/cache/epub/53552/pg53552.txt)

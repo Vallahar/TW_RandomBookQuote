@@ -1,19 +1,46 @@
+#!venv/lib64/python3.6
 import tweepy
 from key import consumer_key, consumer_secret, access_token, access_token_secret
+from random import randrange
 
 # 'key' is a file with the API authentication tokens and keys, which
 # isn't in the repository to protect the integrity of the account.
 
-# Function that generates the tweet's text
-def tweetGeneration():
-    # Retrieve the source file
-    # Generate a random number and switch the pointer to that line
-    # - Poemas
-    #   - Retrieve a string up to the next period or verse.
-    # - Textos
-    #   - Retrieve a string up to the next period. If reached limit, try again.
+# Constants 'for readability' (I just kinda like to do this, I reckon is niche)
+INTRO = 0
+LEGENDS = 1
+LETTERS = 2
+POEMS = 3
+CHAR_LIMIT = 240
 
-    return "Bécquer era el puto amo."
+# Function generating the actual tweet text
+def generate(fileName):
+    fd = open(fileName, "r")
+    content = fd.read()
+
+    content = content.split(".")
+
+    while(True):
+        tweet = content[randrange(len(content))].strip()
+        if (len(tweet) <= CHAR_LIMIT and tweet.strip() != ""):
+            break
+
+    return tweet
+
+# Function that decides the source of the tweet
+def tweet():
+    choice = randrange(4)
+
+    if (choice == INTRO):
+        tweet = generate("intro.txt")
+    elif (choice == LEGENDS):
+        tweet = generate("legends.txt")
+    elif (choice == LETTERS):
+        tweet = generate("letters.txt")
+    elif (choice == POEMS):
+        tweet = generate("poems.txt")
+
+    return tweet
 
 # Twitter authentication
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -23,4 +50,4 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 # Tweet sender
-api.update_status(tweetGeneration())
+api.update_status(tweet())

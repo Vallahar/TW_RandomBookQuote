@@ -1,3 +1,5 @@
 key.py
 venv/
 __pycache__
+parse.py
+source.txt
