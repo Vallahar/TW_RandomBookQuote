@@ -16,8 +16,9 @@ POEMS = 3
 CHAR_LIMIT = 240
 TIME_TO_WAIT = 1800
 
-# Function generating the actual tweet text
+
 def generate(fileName):
+    """Generate the actual tweet text"""
     fd = open(fileName, "r")
     content = fd.read()
 
@@ -35,8 +36,9 @@ def generate(fileName):
 
     return tweet
 
-# Function that decides the source of the tweet
+
 def tweet():
+    """Picks the tweet's source"""
     choice = randrange(4)
 
     if (choice == INTRO):
@@ -50,15 +52,18 @@ def tweet():
 
     return tweet
 
-# Function that searches for duplicates in the tweetLog
+
 def checkDuplicate(str):
+    """Searches for duplicates in the tweetLog"""
     with open('tweetLog.txt') as tweetLog:
         if str in tweetLog.read():
             return True
         else: 
             return False
 
+
 def writeLog(tweetContent):
+    """Writes to the log"""
     fd = open("tweetLog.txt", "a+")
     now = datetime.now()
     string = "Tweet sent on " + now.strftime("%H:%M:%S - %d/%m/%Y (GMT)")
@@ -67,18 +72,19 @@ def writeLog(tweetContent):
     fd.close
 
 
-while(True):
-    # Twitter authentication
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+if __name__ == "__main__":
+    while(True):
+        # Twitter authentication
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
 
-    # API Object
-    api = tweepy.API(auth)
+        # API Object
+        api = tweepy.API(auth)
 
-    # Tweet sender
-    newTweet = tweet()
-    api.update_status(newTweet)
-    writeLog(newTweet)
+        # Tweet sender
+        newTweet = tweet()
+        api.update_status(newTweet)
+        writeLog(newTweet)
 
-    # Dirty way to make the script wait 30mins to tweet again
-    time.sleep(TIME_TO_WAIT)
+        # Dirty way to make the script wait 30mins to tweet again
+        time.sleep(TIME_TO_WAIT)
