@@ -66,7 +66,8 @@ def writeLog(tweetContent):
     fd.write(string)
     fd.close
 
-
+# Sleep until the right time to the right time (sketchy)
+time.sleep(1320)
 while(True):
     # Twitter authentication
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
