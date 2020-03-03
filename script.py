@@ -14,6 +14,7 @@ LEGENDS = 1
 LETTERS = 2
 POEMS = 3
 CHAR_LIMIT = 240
+TIME_TO_WAIT = 1800
 
 # Function generating the actual tweet text
 def generate(fileName):
@@ -24,6 +25,7 @@ def generate(fileName):
 
     while(True):
         tweet = content[randrange(len(content))].strip()
+	# TODO: add a notice when we've run out of original tweets
         if ((len(tweet) + 1) <= CHAR_LIMIT and tweet.strip() != "" and checkDuplicate(tweet) == False):
             break
 
@@ -79,4 +81,4 @@ while(True):
     writeLog(newTweet)
 
     # Dirty way to make the script wait 30mins to tweet again
-    time.sleep(1800)
+    time.sleep(TIME_TO_WAIT)
