@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 from datetime import datetime
 import tweepy
 from key import consumer_key, consumer_secret, access_token, access_token_secret
@@ -64,17 +65,18 @@ def writeLog(tweetContent):
     fd.close
 
 
-# Twitter authentication
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+while(True):
+    # Twitter authentication
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
 
-# API Object
-api = tweepy.API(auth)
+    # API Object
+    api = tweepy.API(auth)
 
-# Tweet sender
-newTweet = tweet()
-api.update_status(newTweet)
-writeLog(newTweet)
+    # Tweet sender
+    newTweet = tweet()
+    api.update_status(newTweet)
+    writeLog(newTweet)
 
-# Success notice to be redirected to a log file (a bit dirty, I know)
-print("# Success")
+    # Dirty way to make the script wait 30mins to tweet again
+    time.sleep(1800)
