@@ -72,6 +72,7 @@ def writeLog(tweetContent):
     fd.close
 
 
+
 if __name__ == "__main__":
     while(True):
         # Twitter authentication
