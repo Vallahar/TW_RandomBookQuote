@@ -2,3 +2,6 @@ key.py
 __pycache__
 *.pyc
 log.txt
+parse.py
+calculations.py
+source.txt

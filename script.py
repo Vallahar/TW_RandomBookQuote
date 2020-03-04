@@ -17,7 +17,7 @@ CHAR_LIMIT = 240
 TIME_TO_WAIT = 1800
 
 
-def generate(fileName):
+def generate(fileName, choice):
     """Generate the actual tweet text"""
     fd = open(fileName, "r")
     content = fd.read()
@@ -25,11 +25,14 @@ def generate(fileName):
     content = content.split(".")
 
     while(True):
-        tweet = content[randrange(len(content))].strip()
-	# TODO: add a notice when we've run out of original tweets
+        tweet = content[randrange(len(content))].rstrip()
+        # TODO: add a notice when we've run out of original tweets
         if ((len(tweet) + 1) <= CHAR_LIMIT and tweet.strip() != "" and checkDuplicate(tweet) == False):
             break
 
+    if(choice == INTRO or choice == LEGENDS or choice == LETTERS):
+        tweet = tweet.replace("\n", " ")
+        tweet = tweet.strip()
     # I acknowledge this could be done with regex
     if (tweet[-1] != "!" or tweet[-1] != "?"):
         tweet += "."
@@ -42,13 +45,13 @@ def tweet():
     choice = randrange(4)
 
     if (choice == INTRO):
-        tweet = generate("sources/intro.txt")
+        tweet = generate("sources/intro.txt", INTRO)
     elif (choice == LEGENDS):
-        tweet = generate("sources/legends.txt")
+        tweet = generate("sources/legends.txt", LEGENDS)
     elif (choice == LETTERS):
-        tweet = generate("sources/letters.txt")
+        tweet = generate("sources/letters.txt", LETTERS)
     elif (choice == POEMS):
-        tweet = generate("sources/poems.txt")
+        tweet = generate("sources/poems.txt", POEMS)
 
     return tweet
 
@@ -58,7 +61,7 @@ def checkDuplicate(str):
     with open('tweetLog.txt') as tweetLog:
         if str in tweetLog.read():
             return True
-        else: 
+        else:
             return False
 
 
@@ -74,6 +77,7 @@ def writeLog(tweetContent):
 
 
 if __name__ == "__main__":
+    time.sleep(1200)
     while(True):
         # Twitter authentication
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
